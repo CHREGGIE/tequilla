@@ -26,8 +26,14 @@ export default async function AdminDashboardPage() {
 
       <div className="mt-8 flex flex-wrap gap-3">
         <Link
-          href="/admin/tequilas/new"
+          href="/admin/tequilas"
           className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-stone-950 hover:bg-accent-light"
+        >
+          Manage tequilas
+        </Link>
+        <Link
+          href="/admin/tequilas/new"
+          className="rounded-full border border-card-border px-5 py-2 text-sm font-semibold hover:border-accent"
         >
           Add tequila
         </Link>

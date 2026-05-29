@@ -9,7 +9,14 @@ export default async function AdminLayout({
   await requireAdmin();
 
   return (
-    <div className="mx-auto flex max-w-7xl gap-8 px-4 py-10 sm:px-6">
+    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
+      <div className="mb-6 lg:hidden">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-accent-light">
+          Admin
+        </p>
+        <AdminNav />
+      </div>
+      <div className="flex gap-8">
       <aside className="hidden w-48 shrink-0 lg:block">
         <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-accent-light">
           Admin
@@ -17,6 +24,7 @@ export default async function AdminLayout({
         <AdminNav />
       </aside>
       <div className="min-w-0 flex-1">{children}</div>
+      </div>
     </div>
   );
 }

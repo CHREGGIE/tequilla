@@ -18,6 +18,7 @@ export default async function EditTequilaPage({ params }: PageProps) {
   if (!tequila) notFound();
 
   const images = (tequila.tequila_images ?? []) as TequilaImage[];
+  const producer = tequila.producer as { website?: string | null } | null;
 
   return (
     <div className="space-y-8">
@@ -48,7 +49,11 @@ export default async function EditTequilaPage({ params }: PageProps) {
         }}
       />
 
-      <ImageManager tequilaId={tequila.id} images={images} />
+      <ImageManager
+        tequilaId={tequila.id}
+        images={images}
+        suggestedUrl={producer?.website ?? undefined}
+      />
     </div>
   );
 }
