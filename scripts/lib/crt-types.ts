@@ -1,3 +1,6 @@
+export const CRT_URL =
+  "https://www.crt.org.mx/empresas-y-marcas-certificadas/";
+
 export interface CrtRecord {
   empresa: string;
   address: string;

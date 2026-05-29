@@ -64,6 +64,36 @@ Options:
 
 CRT imports create **brand-level** records (one per registered marca + NOM). Expression type defaults to blanco as a placeholder until you enrich via admin.
 
+### 3c. Monitor CRT for changes (scheduled sync)
+
+To detect new listings, updates, or delistings on a recurring basis:
+
+```bash
+# Preview changes without writing to the database
+npm run sync:crt -- --dry-run
+
+# Fetch, diff, and apply changes
+npm run sync:crt
+```
+
+The sync compares the latest CRT page against existing `source = 'crt'` rows and reports:
+- **New** — brand/NOM combos not in your database
+- **Updated** — empresa, address, DOT, or region changed
+- **Possibly removed** — in your DB but missing from the latest fetch (not auto-deleted)
+
+If the CRT site is slow, pass a saved HTML file:
+
+```bash
+npm run sync:crt -- --file=./data/crt-page.html
+```
+
+**Automated monitoring (GitHub Actions):** workflow `.github/workflows/crt-sync.yml` runs every **Monday at 06:00 UTC** and on manual dispatch. Add these repository secrets in GitHub → Settings → Secrets → Actions:
+
+- `NEXT_PUBLIC_SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+
+Each run uploads a JSON report artifact you can download from the Actions tab. Enable GitHub email notifications on workflow failures if you want alerts when the CRT fetch fails.
+
 ### 4. Run locally
 
 ```bash
