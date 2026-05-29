@@ -89,6 +89,36 @@ export function TequilaFilters({ regions, producers }: TequilaFiltersProps) {
       </div>
 
       <div>
+        <label className="mb-2 block text-sm font-medium text-muted">Catalog</label>
+        <div className="flex flex-col gap-1.5">
+          {[
+            { value: "all", label: "All bottles" },
+            { value: "curated", label: "Curated only" },
+            { value: "crt", label: "CRT registry only" },
+          ].map((option) => (
+            <button
+              key={option.value}
+              type="button"
+              onClick={() =>
+                updateParam(
+                  "catalog",
+                  option.value === "all" ? null : option.value,
+                )
+              }
+              className={`rounded-lg px-3 py-2 text-left text-sm transition ${
+                (searchParams.get("catalog") ?? "all") === option.value ||
+                (!searchParams.get("catalog") && option.value === "all")
+                  ? "bg-accent/20 text-accent-light"
+                  : "bg-stone-800/50 text-muted hover:text-foreground"
+              }`}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
         <label className="mb-2 block text-sm font-medium text-muted">Type</label>
         <select
           value={searchParams.get("type") ?? ""}

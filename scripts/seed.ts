@@ -74,6 +74,7 @@ async function seed() {
         price_max: tequila.price_max,
         tasting_notes: tequila.tasting_notes,
         featured: tequila.featured ?? false,
+        source: "seed",
       };
 
       if (tequilaId) {

@@ -18,6 +18,8 @@ export interface Producer {
   logo_url: string | null;
 }
 
+export type TequilaSource = "manual" | "seed" | "crt";
+
 export interface Tequila {
   id: string;
   producer_id: string;
@@ -41,6 +43,8 @@ export interface Tequila {
     finish?: string;
   } | null;
   featured: boolean;
+  source?: TequilaSource | null;
+  crt_dot?: string | null;
   created_at: string;
   updated_at: string;
 }
@@ -98,6 +102,8 @@ export interface RecipeWithTequilas extends Recipe {
   }>;
 }
 
+export type CatalogFilter = "all" | "curated" | "crt";
+
 export interface TequilaFilters {
   q?: string;
   type?: TequilaType;
@@ -106,5 +112,6 @@ export interface TequilaFilters {
   price_range?: PriceRange;
   agave_region?: string;
   producer?: string;
+  catalog?: CatalogFilter;
   sort?: "name" | "price" | "newest";
 }

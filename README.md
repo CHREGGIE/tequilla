@@ -39,7 +39,30 @@ ADMIN_EMAILS=you@example.com
 npm run seed
 ```
 
-This imports **103 tequilas** from 30 producers and **12 cocktail recipes**.
+This imports **103 curated tequilas** from 30 producers and **12 cocktail recipes**.
+
+### 3b. Bulk import CRT registry (optional)
+
+Import official brand/NOM/producer records from the [CRT certified brands list](https://www.crt.org.mx/empresas-y-marcas-certificadas/) — factual data only (no reviews or images).
+
+1. Run migration `supabase/migrations/003_crt_import_fields.sql` in Supabase SQL Editor
+2. Import:
+
+```bash
+npm run import:crt
+```
+
+If the CRT site is slow, save the page as HTML in your browser and run:
+
+```bash
+npm run import:crt -- --file=./data/crt-page.html
+```
+
+Options:
+- `--limit=500` — import first N records (for testing)
+- Existing curated seed entries are preserved (not overwritten)
+
+CRT imports create **brand-level** records (one per registered marca + NOM). Expression type defaults to blanco as a placeholder until you enrich via admin.
 
 ### 4. Run locally
 

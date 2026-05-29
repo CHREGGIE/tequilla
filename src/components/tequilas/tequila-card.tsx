@@ -10,11 +10,12 @@ function BottlePlaceholder({ name }: { name: string }) {
   );
 }
 
-function Badge({ children, variant = "default" }: { children: React.ReactNode; variant?: "default" | "green" | "amber" }) {
+function Badge({ children, variant = "default" }: { children: React.ReactNode; variant?: "default" | "green" | "amber" | "slate" }) {
   const styles = {
     default: "bg-stone-800 text-stone-200",
     green: "bg-emerald-900/60 text-emerald-200",
     amber: "bg-amber-900/60 text-amber-200",
+    slate: "bg-slate-700/60 text-slate-200",
   };
   return (
     <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${styles[variant]}`}>
@@ -52,6 +53,7 @@ export function TequilaCard({ tequila }: { tequila: TequilaWithProducer }) {
           <Badge>{formatTequilaType(tequila.type)}</Badge>
           {tequila.additive_free && <Badge variant="green">Additive-Free</Badge>}
           {tequila.organic && <Badge variant="amber">Organic</Badge>}
+          {tequila.source === "crt" && <Badge variant="slate">CRT Registry</Badge>}
         </div>
 
         <div>
@@ -62,7 +64,7 @@ export function TequilaCard({ tequila }: { tequila: TequilaWithProducer }) {
         </div>
 
         <p className="mt-auto text-sm font-medium text-accent-light">
-          {formatPriceRange(tequila.price_range)}
+          {tequila.price_range ? formatPriceRange(tequila.price_range) : tequila.source === "crt" ? "NOM " + (tequila.noma ?? "—") : "—"}
         </p>
       </div>
     </Link>

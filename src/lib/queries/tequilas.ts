@@ -53,6 +53,11 @@ export async function getTequilas(filters: TequilaFilters = {}) {
   if (producerId) {
     query = query.eq("producer_id", producerId);
   }
+  if (filters.catalog === "crt") {
+    query = query.eq("source", "crt");
+  } else if (filters.catalog === "curated") {
+    query = query.or("source.is.null,source.neq.crt");
+  }
 
   const { data, error } = await query;
   if (error) throw error;
@@ -102,6 +107,27 @@ export async function getTequilaStats() {
     total: total ?? 0,
     additiveFree: additiveFree ?? 0,
     organic: organic ?? 0,
+  };
+}
+
+export async function getCatalogCounts() {
+  const supabase = await createClient();
+  const [total, crt, curated] = await Promise.all([
+    supabase.from("tequilas").select("*", { count: "exact", head: true }),
+    supabase
+      .from("tequilas")
+      .select("*", { count: "exact", head: true })
+      .eq("source", "crt"),
+    supabase
+      .from("tequilas")
+      .select("*", { count: "exact", head: true })
+      .or("source.is.null,source.neq.crt"),
+  ]);
+
+  return {
+    total: total.count ?? 0,
+    crt: crt.count ?? 0,
+    curated: curated.count ?? 0,
   };
 }
 

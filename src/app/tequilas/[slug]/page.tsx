@@ -54,6 +54,11 @@ export default async function TequilaDetailPage({ params }: PageProps) {
                   Organic
                 </span>
               )}
+              {tequila.source === "crt" && (
+                <span className="rounded-full bg-slate-700/60 px-3 py-1 text-xs font-medium text-slate-200">
+                  CRT Registry
+                </span>
+              )}
               {tequila.price_range && (
                 <span className="rounded-full bg-accent/20 px-3 py-1 text-xs font-medium text-accent-light">
                   {formatPriceRange(tequila.price_range)}
@@ -71,6 +76,25 @@ export default async function TequilaDetailPage({ params }: PageProps) {
 
           {tequila.description && (
             <p className="leading-relaxed text-muted">{tequila.description}</p>
+          )}
+
+          {tequila.source === "crt" && (
+            <p className="rounded-xl border border-slate-700/50 bg-slate-900/40 px-4 py-3 text-sm text-muted">
+              Official CRT registry entry — factual producer and brand data only.
+              {tequila.crt_dot && (
+                <>
+                  {" "}
+                  <a
+                    href={`https://www.crt.org.mx/empresas-y-marcas-certificadas/?dot=${tequila.crt_dot}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-accent-light hover:underline"
+                  >
+                    View on CRT
+                  </a>
+                </>
+              )}
+            </p>
           )}
 
           <SaveButtons

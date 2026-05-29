@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import { TequilaCard } from "@/components/tequilas/tequila-card";
 import { TequilaFilters } from "@/components/tequilas/tequila-filters";
 import { isSupabaseConfigured } from "@/lib/utils";
-import { getFilterOptions, getTequilas } from "@/lib/queries/tequilas";
-import type { TequilaFilters as Filters, TequilaType, PriceRange } from "@/types/database";
+import { getCatalogCounts, getFilterOptions, getTequilas } from "@/lib/queries/tequilas";
+import type { TequilaFilters as Filters, TequilaType, PriceRange, CatalogFilter } from "@/types/database";
 
 interface PageProps {
   searchParams: Promise<Record<string, string | undefined>>;
@@ -18,6 +18,7 @@ function parseFilters(params: Record<string, string | undefined>): Filters {
     price_range: params.price_range as PriceRange | undefined,
     agave_region: params.agave_region,
     producer: params.producer,
+    catalog: (params.catalog as CatalogFilter) || "all",
     sort: (params.sort as Filters["sort"]) ?? "name",
   };
 }
@@ -35,9 +36,10 @@ export default async function TequilasPage({ searchParams }: PageProps) {
   }
 
   const filters = parseFilters(params);
-  const [tequilas, filterOptions] = await Promise.all([
+  const [tequilas, filterOptions, catalogCounts] = await Promise.all([
     getTequilas(filters),
     getFilterOptions(),
+    getCatalogCounts(),
   ]);
 
   return (
@@ -45,7 +47,11 @@ export default async function TequilasPage({ searchParams }: PageProps) {
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Tequila Catalog</h1>
         <p className="mt-1 text-muted">
-          {tequilas.length} bottle{tequilas.length === 1 ? "" : "s"} found
+          {tequilas.length} bottle{tequilas.length === 1 ? "" : "s"} shown
+          {filters.catalog === "curated" && ` · ${catalogCounts.curated} curated total`}
+          {filters.catalog === "crt" && ` · ${catalogCounts.crt} CRT registry total`}
+          {filters.catalog === "all" &&
+            ` · ${catalogCounts.curated} curated, ${catalogCounts.crt} CRT registry`}
         </p>
       </div>
 
