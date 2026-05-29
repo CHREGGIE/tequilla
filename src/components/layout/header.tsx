@@ -1,14 +1,17 @@
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { checkIsAdmin } from "@/lib/admin/auth";
 import { isSupabaseConfigured } from "@/lib/utils";
 
 export async function Header() {
   let user = null;
+  let isAdmin = false;
 
   if (isSupabaseConfigured()) {
     const supabase = await createClient();
     const { data } = await supabase.auth.getUser();
     user = data.user;
+    isAdmin = await checkIsAdmin();
   }
 
   return (
@@ -27,6 +30,11 @@ export async function Header() {
           <Link href="/recipes" className="transition hover:text-accent-light">
             Recipes
           </Link>
+          {isAdmin && (
+            <Link href="/admin" className="transition hover:text-accent-light">
+              Admin
+            </Link>
+          )}
           {user ? (
             <Link href="/account" className="transition hover:text-accent-light">
               Account

@@ -41,3 +41,12 @@ export function isSupabaseConfigured(): boolean {
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
   );
 }
+
+export function getImageUrl(url: string | null | undefined): string | null {
+  if (!url) return null;
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+
+  const base = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (!base) return url;
+  return `${base}/storage/v1/object/public/tequila-images/${url}`;
+}

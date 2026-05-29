@@ -1,4 +1,4 @@
-import { formatTequilaType, formatPriceRange, getInitials } from "@/lib/utils";
+import { formatTequilaType, formatPriceRange, getInitials, getImageUrl } from "@/lib/utils";
 import type { TequilaWithProducer } from "@/types/database";
 import Link from "next/link";
 
@@ -24,8 +24,10 @@ function Badge({ children, variant = "default" }: { children: React.ReactNode; v
 }
 
 export function TequilaCard({ tequila }: { tequila: TequilaWithProducer }) {
-  const primaryImage = tequila.tequila_images?.find((img) => img.is_primary)?.url
-    ?? tequila.tequila_images?.[0]?.url;
+  const primaryImage = getImageUrl(
+    tequila.tequila_images?.find((img) => img.is_primary)?.url
+      ?? tequila.tequila_images?.[0]?.url,
+  );
 
   return (
     <Link

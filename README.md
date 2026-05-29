@@ -13,7 +13,9 @@ The world's tequila catalog — browse additive-free, organic, and premium tequi
 ### 1. Create a Supabase project
 
 1. Go to [supabase.com](https://supabase.com) and create a new project
-2. Open **SQL Editor** and run the migration in `supabase/migrations/001_initial_schema.sql`
+2. Open **SQL Editor** and run both migrations:
+   - `supabase/migrations/001_initial_schema.sql`
+   - `supabase/migrations/002_storage_and_admin.sql`
 3. Under **Project Settings → API**, copy your project URL and keys
 
 ### 2. Configure environment
@@ -28,6 +30,7 @@ Fill in:
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+ADMIN_EMAILS=you@example.com
 ```
 
 ### 3. Seed the database
@@ -53,9 +56,24 @@ Open [http://localhost:3000](http://localhost:3000).
 - Recipe catalog with recommended tequila pairings
 - User accounts with favorites & wishlist
 - 103-bottle seed dataset
+- **Admin dashboard** at `/admin` — CRUD tequilas & recipes, upload bottle images
+- **Supabase Storage** for bottle photos
 
-## Phase 2 (planned)
+## Admin access
 
-- Admin dashboard
+1. Add your email to `ADMIN_EMAILS` in `.env.local` (comma-separated for multiple admins)
+2. Add `SUPABASE_SERVICE_ROLE_KEY` — required for admin writes and image uploads
+3. Sign in, then visit [/admin](http://localhost:3000/admin)
+
+On Vercel, add `ADMIN_EMAILS` and `SUPABASE_SERVICE_ROLE_KEY` as environment variables, then redeploy.
+
+## Uploading bottle images
+
+1. Go to **Admin → Tequilas → Edit** any bottle
+2. Scroll to **Bottle images** and click **Upload image**
+3. First upload becomes the primary catalog photo automatically
+
+## Phase 2 (remaining)
+
 - New releases feed
-- Image uploads via Supabase Storage
+- Bulk image import
