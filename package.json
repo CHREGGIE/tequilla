@@ -10,6 +10,8 @@
     "seed": "tsx --env-file=.env.local scripts/seed.ts",
     "import:crt": "tsx --env-file=.env.local scripts/import-crt.ts",
     "sync:crt": "tsx --env-file=.env.local scripts/sync-crt.ts"
+    "brands:propose": "tsx --env-file=.env.local scripts/propose-brands.ts",
+    "brands:apply": "tsx --env-file=.env.local scripts/apply-brands.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
