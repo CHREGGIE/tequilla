@@ -13,7 +13,6 @@
   "brands:propose": "tsx --env-file=.env.local scripts/propose-brands.ts",
   "brands:apply": "tsx --env-file=.env.local scripts/apply-brands.ts",
   "learn:seed": "tsx --env-file=.env.local scripts/seed-learn.ts"
-},
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
