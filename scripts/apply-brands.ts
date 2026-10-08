@@ -166,9 +166,8 @@ async function main() {
       const batch = tequilaIds.slice(i, i + 500);
       const { error: linkErr, count } = await supabase
         .from('tequilas')
-        .update({ brand_id: brandId })
-        .in('id', batch)
-        .select('id', { count: 'exact', head: true });
+        .update({ brand_id: brandId }, { count: 'exact' })
+        .in('id', batch);
       if (linkErr) {
         console.error(`Failed to link tequilas to "${finalSlug}":`, linkErr.message);
         errors++;

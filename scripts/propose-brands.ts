@@ -13,7 +13,6 @@
 
 import { createClient } from '@supabase/supabase-js';
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { dirname } from 'node:path';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -94,7 +93,12 @@ async function main() {
 
   const pageSize = 1000;
   let from = 0;
-  const allTequilas: any[] = [];
+  const allTequilas: {
+    id: string;
+    name: string;
+    source: string | null;
+    producers: unknown;
+  }[] = [];
 
   while (true) {
     const { data, error } = await supabase
