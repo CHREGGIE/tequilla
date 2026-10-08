@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local data (CRT page dumps, brand proposal CSV/JSON)
+/data/
