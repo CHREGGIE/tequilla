@@ -9,6 +9,17 @@
   --accent: #d97706;
   --accent-light: #fbbf24;
   --accent-dark: #92400e;
+
+  /* Bottle placeholder (components/tequilas/bottle-placeholder.tsx) */
+  --bottle-glass: rgb(250 250 249 / 0.04);
+  --bottle-outline: rgb(168 162 158 / 0.55);
+  --bottle-highlight: rgb(250 250 249 / 0.18);
+  --bottle-cork: #8c7250;
+  --liquid-blanco: rgb(214 228 190 / 0.10);
+  --liquid-cristalino: rgb(205 228 245 / 0.13);
+  --liquid-reposado: #d9a648;
+  --liquid-anejo: #b9702f;
+  --liquid-extra_anejo: #7a3f1a;
 }
 
 @theme inline {

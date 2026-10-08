@@ -36,7 +36,13 @@ export default async function TequilaDetailPage({ params }: PageProps) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <div className="grid gap-10 lg:grid-cols-2">
-        <TequilaGallery name={tequila.name} images={tequila.tequila_images ?? []} />
+        <TequilaGallery
+          name={tequila.name}
+          images={tequila.tequila_images ?? []}
+          type={tequila.type}
+          slug={tequila.slug}
+          noma={tequila.noma}
+        />
 
         <div className="space-y-6">
           <div>

@@ -1,14 +1,7 @@
-import { formatTequilaType, formatPriceRange, getInitials, getImageUrl } from "@/lib/utils";
+import { formatTequilaType, formatPriceRange, getImageUrl } from "@/lib/utils";
+import { BottlePlaceholder } from "@/components/tequilas/bottle-placeholder";
 import type { TequilaWithProducer } from "@/types/database";
 import Link from "next/link";
-
-function BottlePlaceholder({ name }: { name: string }) {
-  return (
-    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-accent-dark/40 to-stone-900">
-      <span className="text-3xl font-bold text-accent-light/80">{getInitials(name)}</span>
-    </div>
-  );
-}
 
 function Badge({ children, variant = "default" }: { children: React.ReactNode; variant?: "default" | "green" | "amber" | "slate" }) {
   const styles = {
@@ -44,7 +37,12 @@ export function TequilaCard({ tequila }: { tequila: TequilaWithProducer }) {
             className="h-full w-full object-cover transition group-hover:scale-105"
           />
         ) : (
-          <BottlePlaceholder name={tequila.name} />
+          <BottlePlaceholder
+            name={tequila.name}
+            type={tequila.type}
+            seed={tequila.slug}
+            noma={tequila.noma}
+          />
         )}
       </div>
 

@@ -1,15 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { getInitials, getImageUrl } from "@/lib/utils";
+import { getImageUrl } from "@/lib/utils";
+import { BottlePlaceholder } from "@/components/tequilas/bottle-placeholder";
 import type { TequilaImage } from "@/types/database";
 
 interface TequilaGalleryProps {
   name: string;
   images: TequilaImage[];
+  type: string;
+  slug: string;
+  noma: string | null;
 }
 
-export function TequilaGallery({ name, images }: TequilaGalleryProps) {
+export function TequilaGallery({ name, images, type, slug, noma }: TequilaGalleryProps) {
+  const placeholder = <BottlePlaceholder name={name} type={type} seed={slug} noma={noma} />;
   const sorted = [...images].sort((a, b) => a.sort_order - b.sort_order);
   const [activeIndex, setActiveIndex] = useState(0);
   const active = sorted[activeIndex];
@@ -17,8 +22,8 @@ export function TequilaGallery({ name, images }: TequilaGalleryProps) {
 
   if (!sorted.length) {
     return (
-      <div className="flex aspect-[3/4] items-center justify-center rounded-2xl bg-gradient-to-br from-accent-dark/40 to-stone-900">
-        <span className="text-5xl font-bold text-accent-light/80">{getInitials(name)}</span>
+      <div className="aspect-[3/4] overflow-hidden rounded-2xl border border-card-border">
+        {placeholder}
       </div>
     );
   }
@@ -34,9 +39,7 @@ export function TequilaGallery({ name, images }: TequilaGalleryProps) {
             className="h-full w-full object-cover"
           />
         ) : (
-          <div className="flex h-full items-center justify-center">
-            <span className="text-5xl font-bold text-accent-light/80">{getInitials(name)}</span>
-          </div>
+          placeholder
         )}
       </div>
       {sorted.length > 1 && (
