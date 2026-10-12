@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import { TequilaGallery } from "@/components/tequilas/tequila-gallery";
 import { SaveButtons } from "@/components/tequilas/save-buttons";
 import { RecipeCard } from "@/components/recipes/recipe-card";
+import { LeafIcon, PureDropIcon } from "@/components/brand/icons";
+import { LearnTooltip } from "@/components/learn/learn-tooltip";
+import { TequilaLearnMore } from "@/components/learn/tequila-learn-more";
 import { createClient } from "@/lib/supabase/server";
 import { getRecipesForTequila, getTequilaBySlug } from "@/lib/queries/tequilas";
 import { getUserListStatus } from "@/lib/queries/user-lists";
@@ -47,34 +50,34 @@ export default async function TequilaDetailPage({ params }: PageProps) {
         <div className="space-y-6">
           <div>
             <div className="mb-3 flex flex-wrap gap-2">
-              <span className="rounded-full bg-stone-800 px-3 py-1 text-xs font-medium">
+              <span className="rounded-full bg-cream-100 px-3 py-1 text-xs font-medium text-oak-700">
                 {formatTequilaType(tequila.type)}
               </span>
               {tequila.additive_free && (
-                <span className="rounded-full bg-emerald-900/60 px-3 py-1 text-xs font-medium text-emerald-200">
-                  Additive-Free
+                <span className="inline-flex items-center gap-1 rounded-full bg-agave-100 px-3 py-1 text-xs font-medium text-agave-700">
+                  <PureDropIcon className="h-3.5 w-3.5" /> Additive-free
                 </span>
               )}
               {tequila.organic && (
-                <span className="rounded-full bg-amber-900/60 px-3 py-1 text-xs font-medium text-amber-200">
-                  Organic
+                <span className="inline-flex items-center gap-1 rounded-full bg-copper-300/40 px-3 py-1 text-xs font-medium text-copper-700">
+                  <LeafIcon className="h-3.5 w-3.5" /> Organic
                 </span>
               )}
               {tequila.source === "crt" && (
-                <span className="rounded-full bg-slate-700/60 px-3 py-1 text-xs font-medium text-slate-200">
+                <span className="rounded-full border border-card-border px-3 py-1 text-xs font-medium text-muted">
                   CRT Registry
                 </span>
               )}
               {tequila.price_range && (
-                <span className="rounded-full bg-accent/20 px-3 py-1 text-xs font-medium text-accent-light">
+                <span className="rounded-full bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
                   {formatPriceRange(tequila.price_range)}
                 </span>
               )}
             </div>
-            <h1 className="text-3xl font-bold sm:text-4xl">{tequila.name}</h1>
+            <h1 className="text-4xl leading-tight sm:text-5xl">{tequila.name}</h1>
             <Link
               href={`/tequilas?producer=${encodeURIComponent(tequila.producer.name)}`}
-              className="mt-1 inline-block text-lg text-accent-light hover:underline"
+              className="mt-1 inline-block text-lg text-accent hover:underline"
             >
               {tequila.producer.name}
             </Link>
@@ -85,7 +88,7 @@ export default async function TequilaDetailPage({ params }: PageProps) {
           )}
 
           {tequila.source === "crt" && (
-            <p className="rounded-xl border border-slate-700/50 bg-slate-900/40 px-4 py-3 text-sm text-muted">
+            <p className="rounded-xl border border-card-border bg-cream-100/60 px-4 py-3 text-sm text-muted">
               Official CRT registry entry — factual producer and brand data only.
               {tequila.crt_dot && (
                 <>
@@ -94,7 +97,7 @@ export default async function TequilaDetailPage({ params }: PageProps) {
                     href={`https://www.crt.org.mx/empresas-y-marcas-certificadas/?dot=${tequila.crt_dot}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-accent-light hover:underline"
+                    className="text-accent hover:underline"
                   >
                     View on CRT
                   </a>
@@ -120,7 +123,9 @@ export default async function TequilaDetailPage({ params }: PageProps) {
               <dd className="font-medium">{tequila.agave_region ?? "—"}</dd>
             </div>
             <div>
-              <dt className="text-muted">NOM</dt>
+              <dt className="text-muted">
+                <LearnTooltip term="nom-numbers">NOM</LearnTooltip>
+              </dt>
               <dd className="font-medium">{tequila.noma ?? "—"}</dd>
             </div>
             <div>
@@ -157,7 +162,7 @@ export default async function TequilaDetailPage({ params }: PageProps) {
                   href={tequila.producer.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-2 inline-block text-sm text-accent-light hover:underline"
+                  className="mt-2 inline-block text-sm text-accent hover:underline"
                 >
                   Visit website →
                 </a>
@@ -169,7 +174,7 @@ export default async function TequilaDetailPage({ params }: PageProps) {
 
       {tequila.tequila_editions?.length > 0 && (
         <section className="mt-16">
-          <h2 className="mb-4 text-2xl font-bold">Special editions</h2>
+          <h2 className="mb-4 text-2xl">Special editions</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {tequila.tequila_editions.map((edition) => (
               <div
@@ -179,7 +184,7 @@ export default async function TequilaDetailPage({ params }: PageProps) {
                 <div className="flex items-start justify-between gap-2">
                   <h3 className="font-semibold">{edition.name}</h3>
                   {edition.limited_edition && (
-                    <span className="shrink-0 rounded-full bg-accent/20 px-2 py-0.5 text-xs text-accent-light">
+                    <span className="shrink-0 rounded-full bg-accent-soft px-2 py-0.5 text-xs text-accent">
                       Limited
                     </span>
                   )}
@@ -193,9 +198,11 @@ export default async function TequilaDetailPage({ params }: PageProps) {
         </section>
       )}
 
+      <TequilaLearnMore tequila={tequila} />
+
       {relatedRecipes.length > 0 && (
         <section className="mt-16">
-          <h2 className="mb-4 text-2xl font-bold">Recipes with this tequila</h2>
+          <h2 className="mb-4 text-2xl">Recipes with this tequila</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {relatedRecipes.map((recipe) =>
               recipe ? <RecipeCard key={recipe.id} recipe={recipe} /> : null,

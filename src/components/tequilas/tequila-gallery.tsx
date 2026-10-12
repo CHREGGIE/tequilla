@@ -30,7 +30,7 @@ export function TequilaGallery({ name, images, type, slug, noma }: TequilaGaller
 
   return (
     <div className="space-y-3">
-      <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-stone-900">
+      <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-cream-100">
         {activeSrc ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img

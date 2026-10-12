@@ -13,7 +13,7 @@ export default async function EditRecipePage({ params }: PageProps) {
 
   return (
     <div>
-      <h1 className="mb-6 text-3xl font-bold">Edit recipe</h1>
+      <h1 className="mb-6 text-3xl">Edit recipe</h1>
       <RecipeForm
         initial={{
           id: recipe.id,

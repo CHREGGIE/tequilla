@@ -23,7 +23,7 @@ export default async function EditTequilaPage({ params }: PageProps) {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold">Edit tequila</h1>
+        <h1 className="text-3xl">Edit tequila</h1>
         <p className="text-muted">{tequila.name}</p>
       </div>
 

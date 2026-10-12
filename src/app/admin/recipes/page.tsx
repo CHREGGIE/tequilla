@@ -8,12 +8,12 @@ export default async function AdminRecipesPage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Recipes</h1>
+          <h1 className="text-3xl">Recipes</h1>
           <p className="text-muted">{recipes.length} entries</p>
         </div>
         <Link
           href="/admin/recipes/new"
-          className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-stone-950 hover:bg-accent-light"
+          className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-paper hover:bg-accent-hover"
         >
           Add recipe
         </Link>
@@ -31,7 +31,7 @@ export default async function AdminRecipesPage() {
             </div>
             <Link
               href={`/admin/recipes/${recipe.id}`}
-              className="text-sm text-accent-light hover:underline"
+              className="text-sm text-accent hover:underline"
             >
               Edit
             </Link>

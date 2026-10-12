@@ -3,6 +3,7 @@
 import { useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { toggleFavorite, toggleWishlist } from "@/app/actions/user-lists";
+import { BookmarkIcon, HeartIcon } from "@/components/brand/icons";
 
 interface SaveButtonsProps {
   tequilaId: string;
@@ -36,13 +37,14 @@ export function SaveButtons({
             router.refresh();
           });
         }}
-        className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
           isFavorite
-            ? "bg-emerald-700 text-white"
-            : "border border-card-border bg-card hover:border-emerald-600"
+            ? "bg-agave-700 text-paper"
+            : "border border-card-border bg-card hover:border-agave-500"
         }`}
       >
-        {isFavorite ? "★ Favorited" : "☆ Add to Favorites"}
+        <HeartIcon className="h-4 w-4" fill={isFavorite ? "currentColor" : "none"} />
+        {isFavorite ? "Favorited" : "Add to favorites"}
       </button>
 
       <button
@@ -55,13 +57,14 @@ export function SaveButtons({
             router.refresh();
           });
         }}
-        className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
           isWishlisted
-            ? "bg-accent text-stone-950"
+            ? "bg-accent text-paper"
             : "border border-card-border bg-card hover:border-accent"
         }`}
       >
-        {isWishlisted ? "✓ On Wishlist" : "+ Add to Wishlist"}
+        <BookmarkIcon className="h-4 w-4" fill={isWishlisted ? "currentColor" : "none"} />
+        {isWishlisted ? "On your wishlist" : "Add to wishlist"}
       </button>
     </div>
   );

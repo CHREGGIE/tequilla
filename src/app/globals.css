@@ -1,46 +1,101 @@
 @import "tailwindcss";
 
+/* Tequillist brand palette (see CLAUDE.md → Brand identity). Light only. */
 :root {
-  --background: #0c0a09;
-  --foreground: #fafaf9;
-  --card: #1c1917;
-  --card-border: #292524;
-  --muted: #a8a29e;
-  --accent: #d97706;
-  --accent-light: #fbbf24;
-  --accent-dark: #92400e;
+  --paper: #f7f2e8;
+  --cream-50: #fbf8f0;
+  --cream-100: #efe7d4;
+  --bone: #d7ccb4;
+  --oak-400: #8c7250;
+  --oak-700: #4f3823;
+  --espresso: #1f1410;
+  --agave-100: #e2e7c8;
+  --agave-300: #bfcc8e;
+  --agave-500: #7a8e3a;
+  --agave-700: #495220;
+  --copper-300: #ddb89a;
+  --copper-500: #b97649;
+  --copper-700: #6b3f23;
+  --rosa-300: #d7a99b;
+
+  /* Semantic roles — components use these, not the palette directly */
+  --background: var(--paper);
+  --foreground: var(--espresso);
+  --card: var(--cream-50);
+  --card-border: var(--bone);
+  --muted: #6b5741; /* between oak-400 and oak-700: 6.1:1 on paper (oak-400 fails AA) */
+  --accent: var(--copper-700); /* links + primary buttons: 8:1 on paper */
+  --accent-hover: #4f2d18;
+  --accent-soft: rgb(221 184 154 / 0.35); /* copper-300 tint */
+  --danger: #8e2a1a;
+  --danger-soft: rgb(215 169 155 / 0.3); /* rosa-300 tint */
 
   /* Bottle placeholder (components/tequilas/bottle-placeholder.tsx) */
-  --bottle-glass: rgb(250 250 249 / 0.04);
-  --bottle-outline: rgb(168 162 158 / 0.55);
-  --bottle-highlight: rgb(250 250 249 / 0.18);
+  --bottle-glass: rgb(31 20 16 / 0.025);
+  --bottle-outline: rgb(140 114 80 / 0.7);
+  --bottle-highlight: rgb(255 255 255 / 0.55);
   --bottle-cork: #8c7250;
-  --liquid-blanco: rgb(214 228 190 / 0.10);
-  --liquid-cristalino: rgb(205 228 245 / 0.13);
-  --liquid-reposado: #d9a648;
+  --liquid-blanco: rgb(191 204 142 / 0.28);
+  --liquid-cristalino: rgb(205 222 236 / 0.55);
+  --liquid-reposado: #dcab4f;
   --liquid-anejo: #b9702f;
   --liquid-extra_anejo: #7a3f1a;
 }
 
 @theme inline {
+  --color-paper: var(--paper);
+  --color-cream-50: var(--cream-50);
+  --color-cream-100: var(--cream-100);
+  --color-bone: var(--bone);
+  --color-oak-400: var(--oak-400);
+  --color-oak-700: var(--oak-700);
+  --color-espresso: var(--espresso);
+  --color-agave-100: var(--agave-100);
+  --color-agave-300: var(--agave-300);
+  --color-agave-500: var(--agave-500);
+  --color-agave-700: var(--agave-700);
+  --color-copper-300: var(--copper-300);
+  --color-copper-500: var(--copper-500);
+  --color-copper-700: var(--copper-700);
+  --color-rosa-300: var(--rosa-300);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
   --color-card-border: var(--card-border);
   --color-muted: var(--muted);
   --color-accent: var(--accent);
-  --color-accent-light: var(--accent-light);
-  --color-accent-dark: var(--accent-dark);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-fraunces);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* In a layer so utilities (e.g. font-sans on an h2) can override it */
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 40%, transparent);
+  background: var(--copper-300);
+}
+
+:focus-visible {
+  outline: 2px solid var(--copper-500);
+  outline-offset: 2px;
 }

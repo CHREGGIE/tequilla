@@ -21,7 +21,7 @@ export default async function AccountPage() {
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <div className="mb-8 flex items-start justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Your account</h1>
+          <h1 className="text-3xl">Your account</h1>
           <p className="mt-1 text-muted">{user.email}</p>
         </div>
         <SignOutButton />

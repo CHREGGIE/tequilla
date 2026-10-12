@@ -2,17 +2,16 @@
   "name": "tequilla",
   "version": "0.1.0",
   "private": true,
- "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "eslint",
-  "seed": "tsx --env-file=.env.local scripts/seed.ts",
-  "import:crt": "tsx --env-file=.env.local scripts/import-crt.ts",
-  "sync:crt": "tsx --env-file=.env.local scripts/sync-crt.ts",
-  "brands:propose": "tsx --env-file=.env.local scripts/propose-brands.ts",
-  "brands:apply": "tsx --env-file=.env.local scripts/apply-brands.ts",
-  "learn:seed": "tsx --env-file=.env.local scripts/seed-learn.ts"
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "seed": "tsx --env-file=.env.local scripts/seed.ts",
+    "import:crt": "tsx --env-file=.env.local scripts/import-crt.ts",
+    "sync:crt": "tsx --env-file=.env.local scripts/sync-crt.ts",
+    "brands:propose": "tsx --env-file=.env.local scripts/propose-brands.ts",
+    "brands:apply": "tsx --env-file=.env.local scripts/apply-brands.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.10.3",
@@ -20,7 +19,8 @@
     "cheerio": "^1.2.0",
     "next": "16.2.6",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "react-markdown": "^10.1.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

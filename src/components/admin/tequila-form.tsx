@@ -211,7 +211,7 @@ export function TequilaForm({ producers, initial }: TequilaFormProps) {
         <button
           type="submit"
           disabled={pending}
-          className="rounded-full bg-accent px-6 py-2 text-sm font-semibold text-stone-950 hover:bg-accent-light disabled:opacity-50"
+          className="rounded-full bg-accent px-6 py-2 text-sm font-semibold text-paper hover:bg-accent-hover disabled:opacity-50"
         >
           {pending ? "Saving…" : isEdit ? "Save changes" : "Create tequila"}
         </button>
@@ -220,7 +220,7 @@ export function TequilaForm({ producers, initial }: TequilaFormProps) {
             type="button"
             onClick={handleDelete}
             disabled={pending}
-            className="rounded-full border border-red-800 px-6 py-2 text-sm text-red-400 hover:bg-red-950/30"
+            className="rounded-full border border-danger/40 px-6 py-2 text-sm text-danger hover:bg-danger-soft"
           >
             Delete
           </button>

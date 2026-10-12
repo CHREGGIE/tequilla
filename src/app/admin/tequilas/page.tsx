@@ -8,12 +8,12 @@ export default async function AdminTequilasPage() {
     <div>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold">Tequilas</h1>
+          <h1 className="text-3xl">Tequilas</h1>
           <p className="text-muted">{tequilas.length} entries</p>
         </div>
         <Link
           href="/admin/tequilas/new"
-          className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-stone-950 hover:bg-accent-light"
+          className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-paper hover:bg-accent-hover"
         >
           Add tequila
         </Link>
@@ -44,7 +44,7 @@ export default async function AdminTequilasPage() {
                 <td className="px-4 py-3">
                   <Link
                     href={`/admin/tequilas/${tequila.id}`}
-                    className="text-accent-light hover:underline"
+                    className="text-accent hover:underline"
                   >
                     Edit
                   </Link>

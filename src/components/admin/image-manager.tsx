@@ -107,7 +107,7 @@ export function ImageManager({ tequilaId, images, suggestedUrl }: ImageManagerPr
     <section className="space-y-6 rounded-2xl border border-card-border bg-card p-5">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">Bottle images</h2>
-        <label className="cursor-pointer rounded-full bg-accent px-4 py-2 text-sm font-semibold text-stone-950 hover:bg-accent-light">
+        <label className="cursor-pointer rounded-full bg-accent px-4 py-2 text-sm font-semibold text-paper hover:bg-accent-hover">
           {uploading ? "Uploading…" : "Upload image"}
           <input
             ref={inputRef}
@@ -120,7 +120,7 @@ export function ImageManager({ tequilaId, images, suggestedUrl }: ImageManagerPr
         </label>
       </div>
 
-      <div className="space-y-3 rounded-xl border border-card-border bg-stone-950/40 p-4">
+      <div className="space-y-3 rounded-xl border border-card-border bg-cream-100/60 p-4">
         <div>
           <h3 className="text-sm font-semibold">Import from producer website</h3>
           <p className="mt-1 text-sm text-muted">
@@ -141,7 +141,7 @@ export function ImageManager({ tequilaId, images, suggestedUrl }: ImageManagerPr
           <button
             type="submit"
             disabled={fetching || !pageUrl.trim()}
-            className="rounded-lg bg-stone-800 px-4 py-2 text-sm font-medium text-stone-100 hover:bg-stone-700 disabled:opacity-50"
+            className="rounded-lg bg-espresso px-4 py-2 text-sm font-medium text-paper hover:bg-oak-700 disabled:opacity-50"
           >
             {fetching ? "Finding…" : "Find images"}
           </button>
@@ -159,7 +159,7 @@ export function ImageManager({ tequilaId, images, suggestedUrl }: ImageManagerPr
                   type="button"
                   disabled={Boolean(importingUrl)}
                   onClick={() => handleImport(candidate.url)}
-                  className="overflow-hidden rounded-xl border border-card-border bg-stone-900 text-left transition hover:border-accent disabled:opacity-50"
+                  className="overflow-hidden rounded-xl border border-card-border bg-cream-100 text-left transition hover:border-accent disabled:opacity-50"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -169,9 +169,9 @@ export function ImageManager({ tequilaId, images, suggestedUrl }: ImageManagerPr
                     loading="lazy"
                   />
                   <div className="space-y-1 p-2">
-                    <p className="text-xs font-medium text-stone-200">{candidate.label}</p>
+                    <p className="text-xs font-medium text-foreground">{candidate.label}</p>
                     <p className="truncate text-[10px] text-muted">{candidate.url}</p>
-                    <p className="text-xs text-accent-light">
+                    <p className="text-xs text-accent">
                       {importingUrl === candidate.url ? "Importing…" : "Import this image"}
                     </p>
                   </div>
@@ -183,7 +183,7 @@ export function ImageManager({ tequilaId, images, suggestedUrl }: ImageManagerPr
       </div>
 
       {error && (
-        <p className="rounded-lg bg-red-950/50 px-3 py-2 text-sm text-red-200">{error}</p>
+        <p className="rounded-lg bg-danger-soft px-3 py-2 text-sm text-danger">{error}</p>
       )}
 
       {images.length === 0 ? (
@@ -195,7 +195,7 @@ export function ImageManager({ tequilaId, images, suggestedUrl }: ImageManagerPr
             return (
               <div
                 key={image.id}
-                className="overflow-hidden rounded-xl border border-card-border bg-stone-900"
+                className="overflow-hidden rounded-xl border border-card-border bg-cream-100"
               >
                 {src ? (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -209,14 +209,14 @@ export function ImageManager({ tequilaId, images, suggestedUrl }: ImageManagerPr
                   )}
                   <div className="flex flex-wrap gap-2">
                     {image.is_primary ? (
-                      <span className="rounded-full bg-accent/20 px-2 py-0.5 text-xs text-accent-light">
+                      <span className="rounded-full bg-accent-soft px-2 py-0.5 text-xs text-accent">
                         Primary
                       </span>
                     ) : (
                       <button
                         type="button"
                         onClick={() => handleSetPrimary(image.id)}
-                        className="text-xs text-muted hover:text-accent-light"
+                        className="text-xs text-muted hover:text-accent"
                       >
                         Set primary
                       </button>
@@ -224,7 +224,7 @@ export function ImageManager({ tequilaId, images, suggestedUrl }: ImageManagerPr
                     <button
                       type="button"
                       onClick={() => handleDelete(image.id)}
-                      className="text-xs text-red-400 hover:text-red-300"
+                      className="text-xs text-danger hover:underline"
                     >
                       Delete
                     </button>

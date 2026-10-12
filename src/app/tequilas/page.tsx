@@ -29,7 +29,7 @@ export default async function TequilasPage({ searchParams }: PageProps) {
   if (!isSupabaseConfigured()) {
     return (
       <div className="mx-auto max-w-3xl px-4 py-16 text-center">
-        <h1 className="text-3xl font-bold">Tequila Catalog</h1>
+        <h1 className="text-3xl">Tequila Catalog</h1>
         <p className="mt-2 text-muted">Connect Supabase to browse the catalog.</p>
       </div>
     );
@@ -45,7 +45,7 @@ export default async function TequilasPage({ searchParams }: PageProps) {
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold">Tequila Catalog</h1>
+        <h1 className="text-3xl">Tequila Catalog</h1>
         <p className="mt-1 text-muted">
           {tequilas.length} bottle{tequilas.length === 1 ? "" : "s"} shown
           {filters.catalog === "curated" && ` · ${catalogCounts.curated} curated total`}

@@ -6,7 +6,7 @@ export default async function NewTequilaPage() {
 
   return (
     <div>
-      <h1 className="mb-6 text-3xl font-bold">Add tequila</h1>
+      <h1 className="mb-6 text-3xl">Add tequila</h1>
       <TequilaForm producers={producers} />
     </div>
   );

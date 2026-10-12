@@ -1,17 +1,18 @@
 import { formatTequilaType, formatPriceRange, getImageUrl } from "@/lib/utils";
 import { BottlePlaceholder } from "@/components/tequilas/bottle-placeholder";
+import { LeafIcon, PureDropIcon } from "@/components/brand/icons";
 import type { TequilaWithProducer } from "@/types/database";
 import Link from "next/link";
 
 function Badge({ children, variant = "default" }: { children: React.ReactNode; variant?: "default" | "green" | "amber" | "slate" }) {
   const styles = {
-    default: "bg-stone-800 text-stone-200",
-    green: "bg-emerald-900/60 text-emerald-200",
-    amber: "bg-amber-900/60 text-amber-200",
-    slate: "bg-slate-700/60 text-slate-200",
+    default: "bg-cream-100 text-oak-700",
+    green: "bg-agave-100 text-agave-700",
+    amber: "bg-copper-300/40 text-copper-700",
+    slate: "border border-card-border text-muted",
   };
   return (
-    <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${styles[variant]}`}>
+    <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${styles[variant]}`}>
       {children}
     </span>
   );
@@ -28,7 +29,7 @@ export function TequilaCard({ tequila }: { tequila: TequilaWithProducer }) {
       href={`/tequilas/${tequila.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-card-border bg-card transition hover:border-accent/50 hover:shadow-lg hover:shadow-accent/5"
     >
-      <div className="relative aspect-[3/4] overflow-hidden bg-stone-900">
+      <div className="relative aspect-[3/4] overflow-hidden bg-cream-100">
         {primaryImage ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -49,19 +50,27 @@ export function TequilaCard({ tequila }: { tequila: TequilaWithProducer }) {
       <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="flex flex-wrap gap-1.5">
           <Badge>{formatTequilaType(tequila.type)}</Badge>
-          {tequila.additive_free && <Badge variant="green">Additive-Free</Badge>}
-          {tequila.organic && <Badge variant="amber">Organic</Badge>}
+          {tequila.additive_free && (
+            <Badge variant="green">
+              <PureDropIcon className="h-3.5 w-3.5" /> Additive-free
+            </Badge>
+          )}
+          {tequila.organic && (
+            <Badge variant="amber">
+              <LeafIcon className="h-3.5 w-3.5" /> Organic
+            </Badge>
+          )}
           {tequila.source === "crt" && <Badge variant="slate">CRT Registry</Badge>}
         </div>
 
         <div>
-          <h3 className="font-semibold leading-snug group-hover:text-accent-light">
+          <h3 className="text-lg leading-snug group-hover:text-accent">
             {tequila.name}
           </h3>
           <p className="text-sm text-muted">{tequila.producer?.name}</p>
         </div>
 
-        <p className="mt-auto text-sm font-medium text-accent-light">
+        <p className="mt-auto text-sm font-medium text-accent">
           {tequila.price_range ? formatPriceRange(tequila.price_range) : tequila.source === "crt" ? "NOM " + (tequila.noma ?? "—") : "—"}
         </p>
       </div>

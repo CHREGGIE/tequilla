@@ -63,8 +63,8 @@ export function TequilaFilters({ regions, producers }: TequilaFiltersProps) {
             }
             className={`rounded-full px-3 py-1 text-xs font-medium ${
               searchParams.get("additive_free") === "true"
-                ? "bg-emerald-700 text-white"
-                : "bg-stone-800 text-stone-300"
+                ? "bg-agave-700 text-paper"
+                : "bg-cream-100 text-oak-700"
             }`}
           >
             Additive-Free
@@ -79,8 +79,8 @@ export function TequilaFilters({ regions, producers }: TequilaFiltersProps) {
             }
             className={`rounded-full px-3 py-1 text-xs font-medium ${
               searchParams.get("organic") === "true"
-                ? "bg-amber-700 text-white"
-                : "bg-stone-800 text-stone-300"
+                ? "bg-copper-700 text-paper"
+                : "bg-cream-100 text-oak-700"
             }`}
           >
             Organic
@@ -108,8 +108,8 @@ export function TequilaFilters({ regions, producers }: TequilaFiltersProps) {
               className={`rounded-lg px-3 py-2 text-left text-sm transition ${
                 (searchParams.get("catalog") ?? "all") === option.value ||
                 (!searchParams.get("catalog") && option.value === "all")
-                  ? "bg-accent/20 text-accent-light"
-                  : "bg-stone-800/50 text-muted hover:text-foreground"
+                  ? "bg-accent-soft text-accent"
+                  : "bg-cream-100/60 text-muted hover:text-foreground"
               }`}
             >
               {option.label}
