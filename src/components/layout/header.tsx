@@ -47,11 +47,10 @@ export async function Header() {
         <div className="flex items-center gap-2">
           <Link
             href="/tequilas?additive_free=true"
-            className="inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-paper transition hover:bg-accent-hover"
+            className="inline-flex items-center gap-1.5 rounded-full bg-accent p-2.5 sm:px-4 sm:py-2 text-sm font-semibold text-paper transition hover:bg-accent-hover"
           >
             <PureDropIcon className="h-4 w-4" />
-            <span className="hidden sm:inline">Additive-free</span>
-            <span className="sm:hidden">AF</span>
+            <span className="sr-only sm:not-sr-only">Additive-free</span>
           </Link>
 
           <MobileNav links={links} />

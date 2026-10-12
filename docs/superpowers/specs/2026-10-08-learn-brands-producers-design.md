@@ -1,7 +1,9 @@
 # Learn, Brands & Producers — Design Spec
 
 **Date:** 2026-10-08
-**Status:** Draft — pending Greg's review
+**Status:** Learn built (2026-10-09). Brands/Producers pending.
+
+> **Update 2026-10-09:** Learn content moved from the `learn_entries` table to Markdown files in `content/learn/` (Greg's call), so migration 007 / `learn:seed` are gone and the Learn sections below that mention them are superseded. The rebrand was done first, light only — the "Non-goals: Rebrand" item no longer applies.
 **Source:** Step 4 of `docs/handoff-2026-10-08.md`
 
 ## Overview

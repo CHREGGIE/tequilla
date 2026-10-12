@@ -11,7 +11,7 @@ const KIND_STYLE: Record<LearnKind, { label: string; className: string }> = {
 export function LearnKindBadge({ kind }: { kind: LearnKind }) {
   const style = KIND_STYLE[kind];
   return (
-    <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium ${style.className}`}>
+    <span className={`inline-flex w-fit items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium ${style.className}`}>
       {kind === "guide" ? <BookIcon className="h-3.5 w-3.5" /> : <AgaveMark className="h-3.5 w-3.5" />}
       {style.label}
     </span>

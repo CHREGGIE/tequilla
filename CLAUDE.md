@@ -4,7 +4,7 @@
 
 The world's tequila catalog. Browse additive-free, organic, and premium tequilas with tasting notes, producer context, and editorial.
 
-**Live:** [tequilla-ten.vercel.app](https://tequilla-ten.vercel.app)
+**Live:** [tequillist.com](https://tequillist.com) (also tequilla-ten.vercel.app)
 **Repo:** github.com/CHREGGIE/tequilla
 **Brand:** "Tequillist" — pronounced "te-KILL-ist"
 
@@ -48,7 +48,8 @@ The flat producer→tequila model is wrong. Real structure:
 - `brands` — table exists, cleanup pending (0 rows as of last session)
 - `tequilas` — ~3,015 rows (103 curated with full data, rest `source='crt'` placeholders)
 - `flavors` — 6 families + 34 notes seeded
-- `learn_entries` — editorial content (NOM explainers, additive-free guide, etc.) — **pending** migration 007 + `npm run learn:seed`
+
+**Learn content is not in the database.** Articles are Markdown files in `content/learn/<slug>.md` (frontmatter: title, kind, excerpt, related, order), loaded by `src/lib/learn.ts`. Edit them on GitHub.
 
 **Source column convention:**
 - `source='seed'` — curated with tasting notes, price, ABV, images
@@ -68,10 +69,12 @@ The flat producer→tequila model is wrong. Real structure:
 ### Color tokens (Tailwind)
 Neutrals: `paper #F7F2E8`, `cream-50 #FBF8F0`, `cream-100 #EFE7D4`, `bone #D7CCB4`, `oak-400 #8C7250`, `oak-700 #4F3823`, `espresso #1F1410`
 Accents: `agave-100/300/500/700 #E2E7C8/#BFCC8E/#7A8E3A/#495220`, `copper-300/500/700 #DDB89A/#B97649/#6B3F23`, `rosa-300 #D7A99B`
-Dark mode palette defined separately.
+Light only (no dark mode). Tokens live in `src/app/globals.css`. Components use the semantic roles (`background`, `card`, `muted`, `accent`, `danger`…) or brand names (`agave-700`, `copper-300`…) — never Tailwind's default palette (stone/amber/emerald…).
+- `muted` text is `#6B5741`, not oak-400 — oak-400 fails AA contrast on paper.
+- `accent` (links, primary buttons) is copper-700; copper-500 fails AA for text.
 
 ### Logo
-Lowercase "tequillist" wordmark + 9-leaf agave glyph.
+Lowercase "tequillist" wordmark + 9-leaf agave glyph — `src/components/brand/logo.tsx`, mark in `src/components/brand/icons.tsx` (`AgaveMark`) along with the icon set (24px grid, 1.5 stroke). Favicon: `src/app/icon.svg`.
 
 ### Voice
 Knowledgeable, not snobby. Opinionated, not preachy. Spanish vocabulary used naturally with inline tooltips/glossary. Insider tone — assume reader is curious, not clueless.
@@ -131,7 +134,6 @@ Knowledgeable, not snobby. Opinionated, not preachy. Spanish vocabulary used nat
 ```json
 "brands:propose": "tsx --env-file=.env.local scripts/propose-brands.ts",
 "brands:apply": "tsx --env-file=.env.local scripts/apply-brands.ts",
-"learn:seed": "tsx --env-file=.env.local scripts/seed-learn.ts",
 "import:crt": "tsx --env-file=.env.local scripts/import-crt.ts",
 "sync:crt": "tsx --env-file=.env.local scripts/sync-crt.ts",
 "seed": "tsx --env-file=.env.local scripts/seed.ts"

@@ -31,7 +31,7 @@ export default async function LearnEntryPage({ params }: PageProps) {
 
   return (
     <article className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
-      <nav className="mb-8 text-sm text-muted" aria-label="Breadcrumb">
+      <nav className="mx-auto mb-8 max-w-2xl text-sm text-muted" aria-label="Breadcrumb">
         <Link href="/learn" className="hover:text-accent">
           Learn
         </Link>
@@ -39,7 +39,7 @@ export default async function LearnEntryPage({ params }: PageProps) {
         <span>{LEARN_KIND_LABELS[entry.kind]}</span>
       </nav>
 
-      <div className="max-w-2xl">
+      <div className="mx-auto max-w-2xl">
         <LearnKindBadge kind={entry.kind} />
         <h1 className="mt-3 text-4xl leading-tight sm:text-5xl">{entry.title}</h1>
         <p className="mt-4 border-l-2 border-copper-300 pl-4 text-lg leading-relaxed text-muted">

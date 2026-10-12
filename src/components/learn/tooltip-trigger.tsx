@@ -45,8 +45,9 @@ export function TooltipTrigger({ slug, title, excerpt, children }: Props) {
         type="button"
         aria-describedby={open ? id : undefined}
         aria-expanded={open}
-        onClick={() => setOpen((v) => !v)}
-        onFocus={show}
+        // Focus + click arrive together on tap, so click only ever opens; Escape,
+        // an outside tap or pointer leave close it.
+        onClick={show}
         className="cursor-help underline decoration-oak-400 decoration-dotted underline-offset-4 hover:decoration-accent"
       >
         {children}
